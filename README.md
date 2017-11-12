@@ -1,7 +1,7 @@
 Maintenance (module for Omeka S)
 ================================
 
-[Mainteannce] is a module for [Omeka S] that adds a button to set/unset the
+[Maintenance] is a module for [Omeka S] that adds a setting to set/unset the
 public side of the site under maintenance.
 
 The admin pages remains available, as well as the `login` and `logout` pages.
@@ -20,11 +20,9 @@ See general end user documentation for [Installing a module].
 Usage
 -----
 
-The button is located in the config of the module itself.
-
-A specific text can be displayed.
-
-The maintenance page is the default one and can be themed.
+The checkbox is located in the main settings of the site. A specific text can be
+displayed. The maintenance page is the default one (`omeka/maintenance/index.phtml`,
+in the folder `view` of the module), and can be themed.
 
 
 Warning

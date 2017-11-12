@@ -7,11 +7,6 @@ return [
             __DIR__ . '/../view',
         ],
     ],
-    'form_elements' => [
-        'invokables' => [
-            Form\ConfigForm::class => Form\ConfigForm::class,
-        ],
-    ],
     'controllers' => [
         'invokables' => [
             'Omeka\Controller\Maintenance' => Controller\MaintenanceController::class,
