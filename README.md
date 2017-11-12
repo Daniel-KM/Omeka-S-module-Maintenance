@@ -22,6 +22,8 @@ Usage
 
 The button is located in the config of the module itself.
 
+A specific text can be displayed.
+
 The maintenance page is the default one and can be themed.
 
 
