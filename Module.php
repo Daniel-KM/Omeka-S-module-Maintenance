@@ -2,6 +2,7 @@
 namespace Maintenance;
 
 use Omeka\Module\AbstractModule;
+use Omeka\Stdlib\Message;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\Textarea;
@@ -139,8 +140,16 @@ class Module extends AbstractModule
     {
         $services = $event->getApplication()->getServiceManager();
         if ($this->isAdminRequest($event)) {
+            $basePath = $services->get('ViewHelperManager')->get('basePath');
+            $url = $basePath() . '/admin/setting';
             $messenger = $services->get('ControllerPluginManager')->get('messenger');
-            $messenger->addWarning('Site is under maintenance.'); // @translate
+            $message = new Message(
+                'Site is under %smaintenance%s.', // @translate
+                sprintf('<a href="%s">', htmlspecialchars($url)),
+                '</a>'
+            );
+            $message->setEscapeHtml(false);
+            $messenger->addWarning($message); // @translate
             return;
         }
 
