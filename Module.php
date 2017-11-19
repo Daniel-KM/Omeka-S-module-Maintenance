@@ -49,7 +49,11 @@ class Module extends AbstractModule
 
     public function uninstall(ServiceLocatorInterface $serviceLocator)
     {
-        $settings = $serviceLocator->get('Omeka\Settings');
+        $this->uninstallSettings($serviceLocator->get('Omeka\Settings'));
+    }
+
+    protected function uninstallSettings($settings)
+    {
         $config = require __DIR__ . '/config/module.config.php';
         $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
         foreach ($defaultSettings as $name => $value) {
