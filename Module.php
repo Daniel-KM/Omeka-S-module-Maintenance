@@ -138,8 +138,14 @@ class Module extends AbstractModule
      */
     protected function siteUnderMaintenance(MvcEvent $event)
     {
+        static $done;
+
         $services = $event->getApplication()->getServiceManager();
         if ($this->isAdminRequest($event)) {
+            if ($done) {
+                return;
+            }
+            $done = true;
             $basePath = $services->get('ViewHelperManager')->get('basePath');
             $url = $basePath() . '/admin/setting';
             $messenger = $services->get('ControllerPluginManager')->get('messenger');
