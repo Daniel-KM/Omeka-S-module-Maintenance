@@ -1,11 +1,11 @@
 <?php
 namespace Maintenance;
 
+use Omeka\Form\Element\CkeditorInline;
 use Omeka\Module\AbstractModule;
 use Omeka\Stdlib\Message;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Form\Element\Checkbox;
-use Zend\Form\Element\Textarea;
 use Zend\Form\Fieldset;
 use Zend\Mvc\MvcEvent;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -76,7 +76,8 @@ class Module extends AbstractModule
         $services = $this->getServiceLocator();
         $settings = $services->get('Omeka\Settings');
         $config = $services->get('Config');
-        $urlHelper = $services->get('ViewHelperManager')->get('url');
+        $viewHelpers = $services->get('ViewHelperManager');
+        $urlHelper = $viewHelpers->get('url');
         $form = $event->getTarget();
 
         $defaultSetting = $config['maintenance']['settings'];
@@ -98,21 +99,27 @@ class Module extends AbstractModule
             ],
         ]);
 
-        $fieldset->add([
-            'name' => 'maintenance_text',
-            'type' => Textarea::class,
-            'options' => [
+        $formElementManager = $services->get('FormElementManager');
+        $textarea = $formElementManager->get(CkeditorInline::class);
+        $textarea
+            ->setName('maintenance_text')
+            ->setOptions([
                 'label' => 'Text to display', // @translate
-            ],
-            'attributes' => [
+            ])
+            ->setAttributes([
+                'id' => 'maintenance-text',
                 'rows' => 12,
                 'placeholder' => 'This site is down for maintenance. Please contact the site administrator for more information.', // @translate
                 'value' => $settings->get(
                     'maintenance_text',
                     $config['maintenance']['settings']['maintenance_text']
                 ),
-            ],
-        ]);
+            ]);
+
+        $ckEditorHelper = $viewHelpers->get('ckEditor');
+        $ckEditorHelper();
+
+        $fieldset->add($textarea);
 
         $form->add($fieldset);
     }
