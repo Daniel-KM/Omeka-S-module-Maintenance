@@ -165,7 +165,8 @@ class Module extends AbstractModule
         $maintenanceUri = $urlHelper('maintenance');
         $loginUri = $urlHelper('login');
         $logoutUri = $urlHelper('logout');
-        if (in_array($requestUri, [$maintenanceUri, $loginUri, $logoutUri])) {
+        $migrateUri = $urlHelper('migrate');
+        if (in_array($requestUri, [$maintenanceUri, $loginUri, $logoutUri, $migrateUri])) {
             return;
         }
 
