@@ -16,6 +16,9 @@ Then install it like any other Omeka module and follow the config instructions.
 
 See general end user documentation for [Installing a module].
 
+The module can be deactivated when it is not used in order to avoid the instant
+check on each page.
+
 
 Usage
 -----
