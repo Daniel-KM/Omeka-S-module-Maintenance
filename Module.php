@@ -16,7 +16,7 @@ use Zend\EventManager\Event;
  *
  * Add a setting to set the site under maintenance for the public.
  *
- * @copyright Daniel Berthereau, 2017
+ * @copyright Daniel Berthereau, 2017-2018
  * @license http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt
  */
 class Module extends AbstractModule
@@ -39,7 +39,7 @@ class Module extends AbstractModule
         $settings = $serviceLocator->get('Omeka\Settings');
         $t = $serviceLocator->get('MvcTranslator');
         $config = require __DIR__ . '/config/module.config.php';
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
         foreach ($defaultSettings as $name => $value) {
             if ($name === 'maintenance_text') {
                 $value = $t->translate($value);
@@ -56,7 +56,7 @@ class Module extends AbstractModule
     protected function uninstallSettings($settings)
     {
         $config = require __DIR__ . '/config/module.config.php';
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['settings'];
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
         foreach ($defaultSettings as $name => $value) {
             $settings->delete($name);
         }
@@ -80,7 +80,7 @@ class Module extends AbstractModule
         $urlHelper = $viewHelpers->get('url');
         $form = $event->getTarget();
 
-        $defaultSetting = $config['maintenance']['settings'];
+        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
 
         $fieldset = new Fieldset('maintenance');
         $fieldset->setLabel('Maintenance'); // @translate
@@ -94,7 +94,7 @@ class Module extends AbstractModule
             'attributes' => [
                 'value' => $settings->get(
                     'maintenance_status',
-                    $config['maintenance']['settings']['maintenance_status']
+                    $defaultSettings['maintenance_status']
                 ),
             ],
         ]);
@@ -112,7 +112,7 @@ class Module extends AbstractModule
                 'placeholder' => 'This site is down for maintenance. Please contact the site administrator for more information.', // @translate
                 'value' => $settings->get(
                     'maintenance_text',
-                    $config['maintenance']['settings']['maintenance_text']
+                    $defaultSettings['maintenance_text']
                 ),
             ]);
 

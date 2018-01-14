@@ -23,7 +23,7 @@ return [
         ],
     ],
     'maintenance' => [
-        'settings' => [
+        'config' => [
             'maintenance_status' => false,
             'maintenance_text' => 'This site is down for maintenance. Please contact the site administrator for more information.', // @translate
         ],

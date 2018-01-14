@@ -84,7 +84,7 @@ Current maintainers:
 Copyright
 ---------
 
-* Copyright Daniel Berthereau, 2017
+* Copyright Daniel Berthereau, 2017-2018
 
 
 [Maintenance]: https://github.com/Daniel-KM/Omeka-S-module-Maintenance
