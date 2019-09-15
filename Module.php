@@ -118,6 +118,7 @@ class Module extends AbstractModule
      */
     protected function isAdminRequest(MvcEvent $event)
     {
+        // TODO Use isAdminRequest(), but keep compatibility wth Omeka 1.0.0.
         $request = $event->getRequest();
         return strpos($request->getRequestUri(), $request->getBasePath() . '/admin') === 0;
     }

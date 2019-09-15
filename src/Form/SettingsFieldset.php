@@ -17,6 +17,7 @@ class SettingsFieldset extends Fieldset
                 'type' => Element\Checkbox::class,
                 'options' => [
                     'label' => 'Set the public site under maintenance', // @translate
+                    'info' => 'When Omeka is not under maintenance, it is recommended to disable the module to avoid a check on each page.', // @translate
                 ],
                 'attributes' => [
                     'id' => 'maintenance-status',
