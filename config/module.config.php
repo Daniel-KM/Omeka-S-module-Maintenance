@@ -7,6 +7,11 @@ return [
             dirname(__DIR__) . '/view',
         ],
     ],
+    'form_elements' => [
+        'invokables' => [
+            Form\SettingsFieldset::class => Form\SettingsFieldset::class,
+        ],
+    ],
     'controllers' => [
         'invokables' => [
             'Omeka\Controller\Maintenance' => Controller\MaintenanceController::class,

@@ -1,14 +1,16 @@
 <?php
 namespace Maintenance;
 
-use Omeka\Form\Element\CkeditorInline;
-use Omeka\Module\AbstractModule;
+if (!class_exists(\Generic\AbstractModule::class)) {
+    require file_exists(dirname(__DIR__) . '/Generic/AbstractModule.php')
+    ? dirname(__DIR__) . '/Generic/AbstractModule.php'
+        : __DIR__ . '/src/Generic/AbstractModule.php';
+}
+
+use Generic\AbstractModule;
 use Omeka\Stdlib\Message;
 use Zend\EventManager\SharedEventManagerInterface;
-use Zend\Form\Element\Checkbox;
-use Zend\Form\Fieldset;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\EventManager\Event;
 
 /**
@@ -16,15 +18,12 @@ use Zend\EventManager\Event;
  *
  * Add a setting to set the site under maintenance for the public.
  *
- * @copyright Daniel Berthereau, 2017-2018
+ * @copyright Daniel Berthereau, 2017-2019
  * @license http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt
  */
 class Module extends AbstractModule
 {
-    public function getConfig()
-    {
-        return include __DIR__ . '/config/module.config.php';
-    }
+    const NAMESPACE = __NAMESPACE__;
 
     public function onBootstrap(MvcEvent $event)
     {
@@ -34,93 +33,21 @@ class Module extends AbstractModule
         }
     }
 
-    public function install(ServiceLocatorInterface $serviceLocator)
-    {
-        $settings = $serviceLocator->get('Omeka\Settings');
-        $t = $serviceLocator->get('MvcTranslator');
-        $config = require __DIR__ . '/config/module.config.php';
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
-        foreach ($defaultSettings as $name => $value) {
-            if ($name === 'maintenance_text') {
-                $value = $t->translate($value);
-            }
-            $settings->set($name, $value);
-        }
-    }
-
-    public function uninstall(ServiceLocatorInterface $serviceLocator)
-    {
-        $this->uninstallSettings($serviceLocator->get('Omeka\Settings'));
-    }
-
-    protected function uninstallSettings($settings)
-    {
-        $config = require __DIR__ . '/config/module.config.php';
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
-        foreach ($defaultSettings as $name => $value) {
-            $settings->delete($name);
-        }
-    }
-
     public function attachListeners(SharedEventManagerInterface $sharedEventManager)
     {
         $sharedEventManager->attach(
             \Omeka\Form\SettingForm::class,
             'form.add_elements',
-            [$this, 'addSettingFormElements']
+            [$this, 'handleMainSettings']
         );
     }
 
-    public function addSettingFormElements(Event $event)
+    public function handleMainSettings(Event $event)
     {
-        $services = $this->getServiceLocator();
-        $settings = $services->get('Omeka\Settings');
-        $config = $services->get('Config');
-        $viewHelpers = $services->get('ViewHelperManager');
-        $form = $event->getTarget();
-
-        $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];
-
-        $fieldset = new Fieldset('maintenance');
-        $fieldset->setLabel('Maintenance'); // @translate
-
-        $fieldset->add([
-            'name' => 'maintenance_status',
-            'type' => Checkbox::class,
-            'options' => [
-                'label' => 'Set the public site under maintenance', // @translate
-            ],
-            'attributes' => [
-                'value' => $settings->get(
-                    'maintenance_status',
-                    $defaultSettings['maintenance_status']
-                ),
-            ],
-        ]);
-
-        $formElementManager = $services->get('FormElementManager');
-        $textarea = $formElementManager->get(CkeditorInline::class);
-        $textarea
-            ->setName('maintenance_text')
-            ->setOptions([
-                'label' => 'Text to display', // @translate
-            ])
-            ->setAttributes([
-                'id' => 'maintenance-text',
-                'rows' => 12,
-                'placeholder' => 'This site is down for maintenance. Please contact the site administrator for more information.', // @translate
-                'value' => $settings->get(
-                    'maintenance_text',
-                    $defaultSettings['maintenance_text']
-                ),
-            ]);
-
-        $ckEditorHelper = $viewHelpers->get('ckEditor');
+        $ckEditorHelper = $this->getServiceLocator()->get('ViewHelperManager')->get('ckEditor');
         $ckEditorHelper();
 
-        $fieldset->add($textarea);
-
-        $form->add($fieldset);
+        parent::handleMainSettings($event);
     }
 
     /**
