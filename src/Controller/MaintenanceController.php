@@ -10,7 +10,7 @@ class MaintenanceController extends AbstractActionController
     {
         $settings = $this->settings();
         // Don't display the maintenance page when the site is on.
-        if (!$this->settings()->get('maintenance_status')) {
+        if (!$settings->get('maintenance_status')) {
             // Except if the site is under maintenance of course.
             // See Omeka\Mvc\MvcListeners::redirectToMigration().
             $status = $this->status();
@@ -20,7 +20,7 @@ class MaintenanceController extends AbstractActionController
         }
         $view = new ViewModel();
         $view->setTemplate('omeka/maintenance/index');
-        $view->setVariable('text', $this->settings()->get('maintenance_text'));
+        $view->setVariable('text', $settings->get('maintenance_text'));
         return $view;
     }
 }

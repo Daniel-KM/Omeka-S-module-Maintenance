@@ -77,7 +77,6 @@ class Module extends AbstractModule
         $settings = $services->get('Omeka\Settings');
         $config = $services->get('Config');
         $viewHelpers = $services->get('ViewHelperManager');
-        $urlHelper = $viewHelpers->get('url');
         $form = $event->getTarget();
 
         $defaultSettings = $config[strtolower(__NAMESPACE__)]['config'];

@@ -1,6 +1,16 @@
-<h2><?php echo $this->escapeHtml($this->translate('Site under maintenance')); ?></h2>
+<?php
+/**
+ * @var \Zend\View\Renderer\PhpRenderer $this
+ * @var string $text
+ */
+
+$translate = $this->plugin('translate');
+$escape = $this->plugin('escapeHtml');
+?>
+
+<h2><?= $escape($translate('Site under maintenance')) ?></h2>
 <?php if (empty($text)): ?>
-<p><?php echo $this->escapeHtml($this->translate('This site is down for maintenance. Please contact the site administrator for more information.')); ?></p>
+<p><?= $escape($translate('This site is down for maintenance. Please contact the site administrator for more information.')) ?></p>
 <?php else: ?>
-<?php echo $this->translate($text); ?>
+<?= $translate($text) ?>
 <?php endif; ?>
