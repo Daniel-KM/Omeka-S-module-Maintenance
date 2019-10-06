@@ -3,7 +3,7 @@ namespace Maintenance;
 
 if (!class_exists(\Generic\AbstractModule::class)) {
     require file_exists(dirname(__DIR__) . '/Generic/AbstractModule.php')
-    ? dirname(__DIR__) . '/Generic/AbstractModule.php'
+        ? dirname(__DIR__) . '/Generic/AbstractModule.php'
         : __DIR__ . '/src/Generic/AbstractModule.php';
 }
 
@@ -11,7 +11,6 @@ use Generic\AbstractModule;
 use Omeka\Stdlib\Message;
 use Zend\EventManager\SharedEventManagerInterface;
 use Zend\Mvc\MvcEvent;
-use Zend\EventManager\Event;
 
 /**
  * Maintenance
@@ -40,14 +39,6 @@ class Module extends AbstractModule
             'form.add_elements',
             [$this, 'handleMainSettings']
         );
-    }
-
-    public function handleMainSettings(Event $event)
-    {
-        $ckEditorHelper = $this->getServiceLocator()->get('ViewHelperManager')->get('ckEditor');
-        $ckEditorHelper();
-
-        parent::handleMainSettings($event);
     }
 
     /**
