@@ -9,8 +9,8 @@ if (!class_exists(\Generic\AbstractModule::class)) {
 
 use Generic\AbstractModule;
 use Omeka\Stdlib\Message;
-use Zend\EventManager\SharedEventManagerInterface;
-use Zend\Mvc\MvcEvent;
+use Laminas\EventManager\SharedEventManagerInterface;
+use Laminas\Mvc\MvcEvent;
 
 /**
  * Maintenance
