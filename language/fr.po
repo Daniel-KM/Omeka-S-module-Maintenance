@@ -3,33 +3,33 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-26 00:00+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-10-26 00:00+0000\n"
+"Last-Translator: Daniel Berthereau <Daniel.fr@Berthereau.net>\n"
+"Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
 
 #: src/Generic/AbstractModule.php:66
 #, php-format
 msgid "This module requires the module \"%s\"."
-msgstr ""
+msgstr "Ce module requiert le module \"%s\"."
 
 #: src/Generic/AbstractModule.php:73
 #, php-format
 msgid "This module requires modules \"%s\"."
-msgstr ""
+msgstr "Ce module requiert les modules \"%s\"."
 
 #: src/Generic/AbstractModule.php:80
 msgid "This module has resources that connot be installed."
-msgstr ""
+msgstr "Ce module a des ressources qui ne peuvent pas être installées."
 
 #: src/Generic/AbstractModule.php:709
 #, php-format
@@ -37,36 +37,42 @@ msgid ""
 "The module \"%s\" was automatically deactivated because the dependencies are "
 "unavailable."
 msgstr ""
+"Le module %s\" a été automatiquement désactivé car ses dépendances ne sont "
+"plus disponibles."
 
 #: view/omeka/maintenance/index.phtml:13
 msgid ""
 "This site is down for maintenance. Please contact the site administrator for "
 "more information."
 msgstr ""
+"Ce site est fermé pour maintenance. Merci de contacter l’administrateur pour "
+"plus d’information."
 
 #: Module.php:77
 #, php-format
 msgid "Site is under %smaintenance%s."
-msgstr ""
+msgstr "Le site est en %smaintenance%s."
 
 #: src/Form/SettingsFieldset.php:10
 msgid "Maintenance"
-msgstr ""
+msgstr "Maintenance"
 
 #: src/Form/SettingsFieldset.php:19
 msgid "Set the public site under maintenance"
-msgstr ""
+msgstr "Placer le site public en maintenance"
 
 #: src/Form/SettingsFieldset.php:20
 msgid ""
 "When Omeka is not under maintenance, it is recommended to disable the module "
 "to avoid a check on each page."
 msgstr ""
+"Quand Omeka n’est pas en maintenance, il est recommandé de désactivé ce "
+"module pour éviter une vérification sur chaque page."
 
 #: src/Form/SettingsFieldset.php:30
 msgid "Text to display"
-msgstr ""
+msgstr "Texte à afficher"
 
 #: src/Controller/MaintenanceController.php:23
 msgid "Site in maintenance mode"
-msgstr ""
+msgstr "Site en maintenance"

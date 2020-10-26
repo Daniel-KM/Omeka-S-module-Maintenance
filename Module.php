@@ -17,7 +17,7 @@ use Omeka\Stdlib\Message;
  *
  * Add a setting to set the site under maintenance for the public.
  *
- * @copyright Daniel Berthereau, 2017-2019
+ * @copyright Daniel Berthereau, 2017-2020
  * @license http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt
  */
 class Module extends AbstractModule
@@ -79,7 +79,7 @@ class Module extends AbstractModule
                 '</a>'
             );
             $message->setEscapeHtml(false);
-            $messenger->addWarning($message); // @translate
+            $messenger->addWarning($message);
             return;
         }
 

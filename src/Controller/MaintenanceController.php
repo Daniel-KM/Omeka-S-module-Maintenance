@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace Maintenance\Controller;
 
 use Laminas\Mvc\Controller\AbstractActionController;
@@ -18,9 +19,10 @@ class MaintenanceController extends AbstractActionController
                 return $this->redirect()->toRoute('top');
             }
         }
-        $view = new ViewModel();
-        $view->setTemplate('omeka/maintenance/index');
-        $view->setVariable('text', $settings->get('maintenance_text'));
-        return $view;
+        $view = new ViewModel([
+            'text' => $settings->get('maintenance_text', 'Site in maintenance mode'), // @translate
+        ]);
+        return $view
+            ->setTemplate('omeka/maintenance/index');
     }
 }
