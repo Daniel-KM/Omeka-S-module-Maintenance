@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 namespace Maintenance;
 
 if (!class_exists(\Generic\AbstractModule::class)) {
@@ -8,9 +8,9 @@ if (!class_exists(\Generic\AbstractModule::class)) {
 }
 
 use Generic\AbstractModule;
-use Omeka\Stdlib\Message;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
+use Omeka\Stdlib\Message;
 
 /**
  * Maintenance
@@ -24,7 +24,7 @@ class Module extends AbstractModule
 {
     const NAMESPACE = __NAMESPACE__;
 
-    public function onBootstrap(MvcEvent $event)
+    public function onBootstrap(MvcEvent $event): void
     {
         parent::onBootstrap($event);
         if ($this->checkMaintenanceStatus($event)) {
@@ -32,7 +32,7 @@ class Module extends AbstractModule
         }
     }
 
-    public function attachListeners(SharedEventManagerInterface $sharedEventManager)
+    public function attachListeners(SharedEventManagerInterface $sharedEventManager): void
     {
         $sharedEventManager->attach(
             \Omeka\Form\SettingForm::class,
@@ -60,7 +60,7 @@ class Module extends AbstractModule
      *
      * @param MvcEvent $event
      */
-    protected function siteUnderMaintenance(MvcEvent $event)
+    protected function siteUnderMaintenance(MvcEvent $event): void
     {
         static $done;
 
