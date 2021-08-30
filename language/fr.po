@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-26 00:00+0000\n"
-"PO-Revision-Date: 2020-10-26 00:00+0000\n"
+"POT-Creation-Date: 2021-08-30 00:00+0000\n"
+"PO-Revision-Date: 2021-08-30 00:00+0000\n"
 "Last-Translator: Daniel Berthereau <Daniel.fr@Berthereau.net>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0\n"
 
 #: src/Generic/AbstractModule.php:66
 #, php-format
@@ -28,16 +28,16 @@ msgid "This module requires modules \"%s\"."
 msgstr "Ce module requiert les modules \"%s\"."
 
 #: src/Generic/AbstractModule.php:80
-msgid "This module has resources that connot be installed."
+msgid "This module has resources that cannot be installed."
 msgstr "Ce module a des ressources qui ne peuvent pas être installées."
 
-#: src/Generic/AbstractModule.php:709
+#: src/Generic/AbstractModule.php:725
 #, php-format
 msgid ""
 "The module \"%s\" was automatically deactivated because the dependencies are "
 "unavailable."
 msgstr ""
-"Le module %s\" a été automatiquement désactivé car ses dépendances ne sont "
+"Le module \"%s\" a été automatiquement désactivé car ses dépendances ne sont "
 "plus disponibles."
 
 #: view/omeka/maintenance/index.phtml:13
