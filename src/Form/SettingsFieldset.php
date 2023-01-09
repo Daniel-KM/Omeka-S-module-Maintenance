@@ -12,6 +12,7 @@ class SettingsFieldset extends Fieldset
     public function init(): void
     {
         $this
+            ->setAttribute('id', 'maintenance')
             ->add([
                 'name' => 'maintenance_status',
                 'type' => Element\Checkbox::class,
