@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace Maintenance;
 
 if (!class_exists(\Generic\AbstractModule::class)) {
@@ -10,6 +11,7 @@ if (!class_exists(\Generic\AbstractModule::class)) {
 use Generic\AbstractModule;
 use Laminas\EventManager\SharedEventManagerInterface;
 use Laminas\Mvc\MvcEvent;
+use Laminas\ServiceManager\ServiceLocatorInterface;
 use Omeka\Stdlib\Message;
 
 /**
@@ -17,12 +19,30 @@ use Omeka\Stdlib\Message;
  *
  * Add a setting to set the site under maintenance for the public.
  *
- * @copyright Daniel Berthereau, 2017-2020
+ * @copyright Daniel Berthereau, 2017-2023
  * @license http://www.cecill.info/licences/Licence_CeCILL_V2.1-en.txt
  */
 class Module extends AbstractModule
 {
     const NAMESPACE = __NAMESPACE__;
+
+    public function install(ServiceLocatorInterface $services): void
+    {
+        parent::install($services);
+        $this->warnDeprecation($services);
+    }
+
+    protected function warnDeprecation($services): void
+    {
+        $messenger = $services->get('ControllerPluginManager')->get('messenger');
+        $message = new Message(
+            'This module is deprecated and has been superceded by %1$sEasy Admin%2$s. The upgrade from it is automatic.', // @translate
+            '<a href="https://gitlab.com/Daniel-KM/Omeka-S-module-EasyAdmin" target="_blank">',
+            '</a>'
+        );
+        $message->setEscapeHtml(false);
+        $messenger->addWarning($message);
+    }
 
     public function onBootstrap(MvcEvent $event): void
     {
